@@ -1,0 +1,15 @@
+This simple library allows conversion of Vcard.0 text to JSON and JSON to Vcard3.0.
+
+The library implents two functions, #parse and #generate.
+
+#parse takes Vcard3.0 text and converts to JSON data
+  For example:
+    VCARD.parse("BEGIN:VCARD\r\nVERSION:3.0\r\nFN:Andrew Pace\r\nEND:VCARD");
+  Returns:
+    {fn: {name: "Andrew Pace"}}
+
+#generate takes JSON data and converts to Vcard3.0 text
+  For example:
+    VCARD.generate({fn: {name: "Andrew Pace"}});
+  Returns:
+    VCARD.parse("BEGIN:VCARD\r\nVERSION:3.0\r\nFN:Andrew Pace\r\nEND:VCARD");
