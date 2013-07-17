@@ -64,7 +64,7 @@ VCARD = (() ->
   
   #parse takes a vcard string and converts it to a json object
   m.parse = (string) ->
-    stringlines = string.split("\r\n")
+    stringlines = string.split(/\r?\n/)
     newlines = []
     for line in stringlines
       unless line.match(/BEGIN:VCARD|END:VCARD/)

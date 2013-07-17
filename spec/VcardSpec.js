@@ -22,8 +22,8 @@ describe("Vcard", function() {
     adr = {"version" : "3.0", "adrs": [{"group" : "item1", "params" : {"types" : ["home", "work"]}, "street" : "1004 Westmont Dr", "locality" : "Alhambra", "region" : "CA", "code" : "91803", "country" : "USA"}]};
     adr_string = "BEGIN:VCARD\r\nVERSION:3.0\r\nitem1.ADR;TYPE=HOME,WORK:;;1004 Westmont Dr;Alhambra;CA;91803;USA\r\nEND:VCARD";
 
-    label = {"version" : "3.0", "labels": [{"group" : "item1", "params" : {"types" : ["home", "work"]}, "address" : "1004 Westmont Dr\nAlhambra, CA\n91803\nUSA"}]};
-    label_string = "BEGIN:VCARD\r\nVERSION:3.0\r\nitem1.LABEL;TYPE=HOME,WORK:1004 Westmont Dr\nAlhambra, CA\n91803\nUSA\r\nEND:VCARD";
+    label = {"version" : "3.0", "labels": [{"group" : "item1", "params" : {"types" : ["home", "work"]}, "address" : "1004 Westmont Dr, Alhambra, CA, 91803, USA"}]};
+    label_string = "BEGIN:VCARD\r\nVERSION:3.0\r\nitem1.LABEL;TYPE=HOME,WORK:1004 Westmont Dr, Alhambra, CA, 91803, USA\r\nEND:VCARD";
 
     tel = {"version" : "3.0", "tels": [{"group" : "item1", "params" : {"types" : ["home", "work"]}, "number" : "+1-323-243-7314"}]};
     tel_string = "BEGIN:VCARD\r\nVERSION:3.0\r\nitem1.TEL;TYPE=HOME,WORK:+1-323-243-7314\r\nEND:VCARD";
@@ -84,6 +84,9 @@ describe("Vcard", function() {
 
     key = {"version" : "3.0", "key" : {"group" : "item1", "params" : {"value" : "binary", "encoding" : "b", "type" : "pub"}, "value" : "abcdefg=="}};
     key_string = "BEGIN:VCARD\r\nVERSION:3.0\r\nitem1.KEY;VALUE=BINARY;ENCODING=B;TYPE=PUB:abcdefg==\r\nEND:VCARD";
+
+    unixnewline = {"version" : "3.0"}
+    unixnewline_string = "BEGIN:VCARD\nVERSION:3.0\nEND:VCARD"
   });
 
   describe(".generate", function() {
@@ -305,6 +308,10 @@ describe("Vcard", function() {
 
     it("creates an key object", function() {
       expect(vcard.parse(key_string)).toEqual(key);
+    });
+
+    it("parses a Unix-style newline vCard", function() {
+      expect(vcard.parse(unixnewline_string)).toEqual(unixnewline);
     });
   });
 });
