@@ -67,7 +67,7 @@ VCARD = (() ->
     stringlines = string.split(/\r?\n/)
     newlines = []
     for line in stringlines
-      unless line.match(/BEGIN:VCARD|END:VCARD/)
+      unless line.match(/BEGIN:VCARD|END:VCARD/) and line != ''
         newlines.push(parse_line(line))
     lines = {}
     for newline in newlines
